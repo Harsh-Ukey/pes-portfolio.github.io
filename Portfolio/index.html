@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Harsh Ukey · Cloud & DevOps Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+:root {
+  --bg: #faf9f6; 
+  --bg2: #ffffff;
+  --sky: #8cb8ff; 
+  --lavender: #d8b4fe; 
+  --mint: #86efac; 
+  --rose: #fda4af; 
+  
+  --glass: rgba(255, 255, 255, 0.65);
+  --glass2: rgba(255, 255, 255, 0.95);
+  --border: rgba(0, 0, 0, 0.05);
+  --border2: rgba(0, 0, 0, 0.09);
+  
+  --text: #1e293b; 
+  --muted: #64748b; 
+  
+  --shadow-sm: 0 4px 20px rgba(149, 157, 165, 0.06);
+  --aws-glow: 0 0 25px rgba(0, 229, 255, 0.3), 0 0 50px rgba(140, 184, 255, 0.25), 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background-color: var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+/* ═══ PREMIUM BACKGROUND ENGINE ═══ */
+.bg-container { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: var(--bg); }
+.blob { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.6; animation: float var(--time, 20s) infinite alternate ease-in-out; }
+.blob-1 { width: 60vw; height: 60vw; background: rgba(140, 184, 255, 0.4); top: -10%; left: -10%; --time: 25s; }
+.blob-2 { width: 50vw; height: 50vw; background: rgba(216, 180, 254, 0.35); bottom: -20%; right: -10%; --time: 22s; animation-direction: alternate-reverse; }
+.blob-3 { width: 40vw; height: 40vw; background: rgba(253, 164, 175, 0.3); top: 40%; left: 50%; --time: 28s; transform: translate(-50%, -50%); }
+.blob-4 { width: 45vw; height: 45vw; background: rgba(134, 239, 172, 0.25); top: 10%; right: 10%; --time: 30s; }
+
+@keyframes float {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(5vw, -5vh) scale(1.1); }
+  66% { transform: translate(-5vw, 5vh) scale(0.9); }
+  100% { transform: translate(8vw, 8vh) scale(1.05); }
+}
+
+.bg-noise { position: absolute; inset: 0; opacity: 0.04; mix-blend-mode: multiply; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
+.bg-grid { position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(rgba(100, 116, 139, 0.2) 1px, transparent 1px); background-size: 32px 32px; -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%); mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%); }
+
+/* ═══ NAV ═══ */
+nav{ position:fixed;top:0;left:0;right:0;z-index:100; display:flex;align-items:center;justify-content:space-between; padding:1.2rem 4rem; background:rgba(250, 249, 246, 0.5); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); }
+.nav-logo{font-family:'Playfair Display',serif; font-size:1.4rem; font-style:italic; font-weight:700;}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{ color:var(--muted);text-decoration:none;font-size:0.8rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; transition:color 0.3s; }
+.nav-links a:hover{color:var(--text)}
+
+/* ═══ MAIN LAYOUT ═══ */
+main{position:relative;z-index:1}
+section{ min-height:80vh; max-width:1150px; margin:0 auto; padding:7rem 2.5rem 4rem; display:flex; flex-direction:column; justify-content:center; }
+
+.s-eyebrow{ display:inline-flex;align-items:center;gap:0.6rem; font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase; color:var(--text);margin-bottom:1rem;font-weight:800; }
+.s-eyebrow::before{content:'';display:inline-block;width:30px;height:2px;background:var(--text);}
+.s-title{ font-family:'Playfair Display',serif; font-size:clamp(2.4rem,4.5vw,3.5rem); font-weight:700; line-height:1.1; margin-bottom:3.5rem; color:var(--text); }
+
+/* ═══ GLASS CARDS & NEON HOVER ═══ */
+.glass{ background:var(--glass); border:1px solid var(--border); backdrop-filter:blur(24px); border-radius:24px; box-shadow: var(--shadow-sm); transition:all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); position: relative; }
+.hover-neon:hover{ background:var(--glass2); transform:translateY(-8px) scale(1.02); box-shadow: var(--aws-glow); border-color: rgba(0, 229, 255, 0.4); z-index: 10; }
+
+/* ════════════════════════════════
+   HERO & TITLE ICON
+════════════════════════════════ */
+#home{flex-direction:row;flex-wrap:wrap;gap:4rem; align-items:center; min-height: 100vh;}
+.hero-l{flex:1;min-width:300px; animation: slideUp 1s ease-out forwards;}
+.hero-name{font-family:'Playfair Display',serif; font-size:5.5rem; font-weight:700; line-height:1.1; margin-bottom:1.5rem; letter-spacing:-0.02em; display: flex; align-items: center; gap: 1rem;}
+.hero-desc{font-size:1.15rem; color:var(--muted); line-height:1.8; margin-bottom:2.5rem; max-width:550px;}
+
+@keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes floatIcon { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-10px) rotate(5deg); } }
+
+.title-icon {
+  display: inline-block;
+  animation: floatIcon 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(140, 184, 255, 0.8));
+}
+
+.status-badge {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  padding: 0.5rem 1.2rem; border-radius: 100px;
+  background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #059669; font-weight: 700; font-size: 0.8rem; margin-bottom: 1.5rem;
+}
+.status-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: #10b981;
+  box-shadow: 0 0 10px #10b981; animation: pulseDot 2s infinite;
+}
+@keyframes pulseDot { 0% { box-shadow: 0 0 0 0 rgba(16,185,129,0.5); } 70% { box-shadow: 0 0 0 10px rgba(16,185,129,0); } 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); } }
+
+.btn{ padding:0.9rem 2.2rem;border-radius:100px;font-size:0.85rem; font-weight:700;text-decoration:none; display:inline-flex;align-items:center;gap:0.5rem; transition:all 0.3s ease; cursor:pointer; }
+.btn-primary{background:var(--text); color:#fff; box-shadow:0 8px 20px rgba(0,0,0,0.15);}
+.btn-primary:hover{transform:translateY(-4px); box-shadow:0 12px 25px rgba(0,0,0,0.2);}
+
+/* ════════════════════════════════
+   ABOUT 
+════════════════════════════════ */
+.about-layout{display:grid;grid-template-columns:1.2fr 1fr;gap:1.8rem}
+.about-bio-card{grid-row:1/3;padding:3.5rem;background:var(--glass);}
+.about-bio-card p{color:var(--muted);font-size:1.1rem;line-height:1.9;margin-bottom:1.2rem;}
+.about-bio-card p strong{color:var(--text);font-weight:700}
+.about-right-col{display:flex; flex-direction:column; gap:1.8rem;}
+
+.cloud-tile{ flex-grow:1; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:3.5rem 2rem; }
+.cloud-tile .ai-icon{ width:85px; height:85px; border-radius:24px; font-size:2.8rem; margin-bottom:1.5rem; background:rgba(140, 184, 255, 0.2); color:#3b82f6; display:flex; align-items:center; justify-content:center; box-shadow: inset 0 0 20px rgba(255,255,255,0.5); }
+.about-small-card{padding:2rem;display:flex;align-items:flex-start;gap:1.2rem;}
+.ai-icon-sm{ width:50px;height:50px;border-radius:14px; display:flex;align-items:center;justify-content:center; font-size:1.3rem;flex-shrink:0; background:rgba(225, 29, 72, 0.15); color:#e11d48; }
+.ai-text h4{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin-bottom:0.4rem;}
+.ai-text p{color:var(--muted);font-size:0.95rem;line-height:1.6}
+
+/* ════════════════════════════════
+   SKILLS 
+════════════════════════════════ */
+.skills-layout{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
+.skill-card{padding:3rem;background:var(--glass);}
+.skill-card-title{ display:flex;align-items:center;gap:0.8rem; font-size:0.85rem; letter-spacing:0.15em;text-transform:uppercase; font-weight:800;margin-bottom:2rem; }
+.skill-pills{display:flex;flex-wrap:wrap;gap:0.8rem}
+.xpill{ display:inline-flex;align-items:center;gap:0.5rem; padding:0.6rem 1.4rem;border-radius:100px;font-size:0.85rem;font-weight:700; border:1px solid var(--border2);background:rgba(255,255,255,0.6); color:var(--text); transition:all 0.3s; }
+.xpill::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0; background:var(--text);}
+.xpill:hover{transform:translateY(-3px); background:#fff; box-shadow:var(--shadow-md); border-color:var(--sky);}
+
+/* ════════════════════════════════
+   EXPERIENCE / TRAINING
+════════════════════════════════ */
+.timeline{border-left:2px solid var(--border2); padding-left:2.5rem; margin-left:1rem; display:flex; flex-direction:column; gap:2.5rem;}
+.tl-item{position:relative; padding:2.5rem; background:var(--glass);}
+.tl-dot{ position:absolute; left:-3.2rem; top:2.8rem; width:20px; height:20px; border-radius:50%; border:5px solid var(--bg); }
+.tl-header{display:flex; justify-content:space-between; align-items:center; margin-bottom:1.2rem; flex-wrap:wrap; gap:1rem;}
+.tl-title h3{font-size:1.4rem; font-weight:700; color:var(--text);}
+.tl-title p{font-size:1rem; font-weight:600; margin-top:0.3rem;}
+.tl-date{font-size:0.85rem; padding:0.4rem 1rem; background:rgba(0,0,0,0.05); border-radius:100px; font-weight:700;}
+.tl-item ul{list-style:none; padding:0; margin-bottom:1.5rem;}
+.tl-item li{font-size:1rem; color:var(--muted); margin-bottom:0.8rem; padding-left:1.5rem; position:relative; line-height:1.6;}
+.tl-item li::before{content:'→'; position:absolute; left:0; color:var(--text); font-weight:700;}
+
+/* ════════════════════════════════
+   PROJECTS
+════════════════════════════════ */
+.proj-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(350px, 1fr)); gap:2.5rem;}
+.proj-card{padding:3rem; display:flex; flex-direction:column;}
+.proj-tags{display:flex; gap:0.6rem; margin-bottom:1.5rem; flex-wrap:wrap;}
+
+.ptag{ padding:0.4rem 0.9rem; border-radius:100px; font-size:0.75rem; font-weight:800; display:inline-flex; align-items:center; gap:0.4rem; border:1px solid; background:#fff; }
+.tag-aws{color:#ff9900; border-color:rgba(255, 153, 0, 0.3); box-shadow: 0 2px 10px rgba(255, 153, 0, 0.1);}
+.tag-tf{color:#7b42bc; border-color:rgba(123, 66, 188, 0.3); box-shadow: 0 2px 10px rgba(123, 66, 188, 0.1);}
+.tag-cpp{color:#00599C; border-color:rgba(0, 89, 156, 0.3); box-shadow: 0 2px 10px rgba(0, 89, 156, 0.1);}
+
+.proj-card h3{font-family:'Playfair Display',serif; font-size:1.6rem; margin-bottom:1rem; color:var(--text);}
+.proj-card p{font-size:1rem; color:var(--muted); line-height:1.7; margin-bottom:2rem; flex-grow:1;}
+.github-link { font-weight:800; color:var(--text); text-decoration:none; font-size: 0.95rem; display:inline-flex; align-items:center; gap:0.5rem; transition:gap 0.3s; padding: 0.5rem 0;}
+.github-link:hover { gap: 0.7rem; color: #3b82f6; }
+
+/* ════════════════════════════════
+   EVENTS & 3D FAN-OUT GALLERY
+════════════════════════════════ */
+.events-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(350px, 1fr)); gap:2.5rem;}
+.event-card{ background:var(--glass); border-radius:24px; overflow:visible; }
+
+.event-img-wrap { position: relative; width: 100%; height: 260px; background: rgba(140, 184, 255, 0.05); border-top-left-radius: 24px; border-top-right-radius: 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: center; perspective: 1200px; }
+.e-img { position: absolute; object-fit: cover; transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); transform-origin: bottom center; }
+.img-main { z-index: 3; width: 100%; height: 100%; border-top-left-radius: 24px; border-top-right-radius: 24px; transform: translateZ(20px); }
+.img-left { z-index: 2; width: 100%; height: 100%; border-top-left-radius: 24px; border-top-right-radius: 24px; opacity: 0; transform: scale(0.9) translateZ(10px); }
+.img-right { z-index: 1; width: 100%; height: 100%; border-top-left-radius: 24px; border-top-right-radius: 24px; opacity: 0; transform: scale(0.9) translateZ(0px); }
+
+.event-card:hover .img-main { width: 60%; height: 75%; border-radius: 16px; transform: translateY(-12%) translateZ(60px); box-shadow: 0 25px 50px rgba(0,0,0,0.25); }
+.event-card:hover .img-left { width: 60%; height: 75%; border-radius: 16px; opacity: 1; transform: translateY(-2%) translateX(-65%) translateZ(30px) rotate(-18deg); box-shadow: -15px 20px 40px rgba(0,0,0,0.15); }
+.event-card:hover .img-right { width: 60%; height: 75%; border-radius: 16px; opacity: 1; transform: translateY(-2%) translateX(65%) translateZ(0px) rotate(18deg); box-shadow: 15px 20px 40px rgba(0,0,0,0.15); }
+
+.event-info{padding:2.5rem;}
+.event-info h3{font-family:'Playfair Display',serif; font-size:1.4rem; margin-bottom:0.5rem;}
+.event-info p{font-size:0.95rem; color:var(--muted); line-height:1.6;}
+.event-date{ display:inline-block; margin-top:1.5rem; font-size:0.8rem; font-weight:800; color:var(--text); text-transform:uppercase; letter-spacing:0.05em; }
+
+/* ════════════════════════════════
+   EDUCATION 
+════════════════════════════════ */
+.edu-card{padding:3.5rem; display:flex; align-items:center; gap:2.5rem; background:var(--glass); flex-wrap:wrap;}
+.edu-icon-container { width: 80px; height: 80px; border-radius: 20px; background: rgba(140, 184, 255, 0.15); display: flex; align-items: center; justify-content: center; }
+.edu-details{flex-grow:1;}
+.edu-details h3{font-size:1.6rem; margin-bottom:0.5rem; color:var(--text);}
+.cgpa-box{ border:2px solid var(--text); padding:1.5rem 2.5rem; border-radius:24px; text-align:center; background:rgba(255,255,255,0.8); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+.cgpa-box span{display:block; font-size:0.8rem; text-transform:uppercase; font-weight:800; margin-bottom:0.3rem; letter-spacing: 0.05em;}
+.cgpa-box strong{font-size:2.8rem; font-family:'Playfair Display',serif; color:var(--text);}
+
+/* ════════════════════════════════
+   CONTACT / CV DOWNLOAD 
+════════════════════════════════ */
+.contact-grid{display:flex; gap:1.5rem; flex-wrap:wrap; justify-content:center;}
+.contact-card{ padding:1.5rem 2rem; background:var(--glass); border-radius:20px; display:flex; align-items:center; gap:1rem; text-decoration:none; color:var(--text); border:1px solid var(--border); transition:all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+.contact-card:hover{transform:translateY(-6px) scale(1.02); box-shadow:var(--aws-glow); border-color: rgba(0, 229, 255, 0.4); z-index:10;}
+.c-icon{width:45px; height:45px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.3rem;}
+
+.cv-banner {
+  margin-top: 3rem; padding: 4rem 2rem; display: flex; flex-direction: column; align-items: center; 
+  justify-content: center; text-align: center; gap: 1.5rem; border-radius: 24px;
+}
+.cv-icon-wrap {
+  width: 75px; height: 75px; border-radius: 20px; background: rgba(140, 184, 255, 0.15); 
+  color: #3b82f6; display: flex; align-items: center; justify-content: center; font-size: 2.2rem;
+}
+
+@media(max-width:768px){
+  .about-layout, .skills-layout{grid-template-columns:1fr;}
+  section{padding:6rem 1.5rem;}
+  nav{padding:1rem 1.5rem;} .nav-links{display:none;}
+  .edu-card{flex-direction:column; text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-container">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+  <div class="bg-grid"></div>
+  <div class="bg-noise"></div>
+</div>
+
+<nav>
+  <div class="nav-logo">Harsh.</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<section id="home">
+  <div class="hero-l">
+    <div class="status-badge">
+      <span class="status-dot"></span>
+      Actively targeting Cloud Internships & Core Engineering roles
+    </div>
+    
+    <h1 class="hero-name">
+      Hi, I'm Harsh Ukey 
+      <span class="title-icon">☁️</span>
+    </h1>
+    
+    <p class="hero-desc">
+      I engineer scalable cloud infrastructure and robust deployment pipelines. Whether I am provisioning networks with <strong>Terraform</strong> or writing clean code in <strong>C++</strong>, I build systems that are efficient, secure, and automated.
+    </p>
+    <div style="display:flex; gap:1.2rem;">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-primary" style="background:var(--bg2); color:var(--text);">Let's Connect</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="s-eyebrow">01 — Context</div>
+  <h2 class="s-title">Beyond the Terminal</h2>
+  <div class="about-layout">
+    <div class="glass about-bio-card">
+      <h3 style="margin-bottom:1.5rem; font-size:1.8rem; color:var(--text); font-family:'Playfair Display',serif;">The Architecture Mindset</h3>
+      <p>
+        I am currently pursuing my <strong>B.Tech in Computer Science Engineering</strong> with a minor in Cloud Computing at Lovely Professional University. My technical journey is driven by a deep appreciation for systems that run flawlessly without manual intervention.
+      </p>
+      <p>
+        From completing my <strong>RHCSA training</strong> to building automated CI/CD workflows, my goal is to bridge the gap between software development and highly resilient IT operations.
+      </p>
+    </div>
+    <div class="about-right-col">
+      <div class="glass hover-neon cloud-tile">
+        <div class="ai-icon"><i class="fas fa-cloud"></i></div>
+        <div class="ai-text">
+          <h4 style="font-size:1.6rem;">Cloud Computing</h4>
+          <p style="font-size: 1rem;">Architecting fault-tolerant AWS environments and multi-tier networks.</p>
+        </div>
+      </div>
+      <div class="glass hover-neon about-small-card">
+        <div class="ai-icon-sm"><i class="fab fa-linux"></i></div>
+        <div class="ai-text">
+          <h4>System Admin</h4>
+          <p>Managing RHEL systems, user models, and bash script automation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="s-eyebrow">02 — Toolkit</div>
+  <h2 class="s-title">Technical Stack</h2>
+  <div class="skills-layout">
+    <div class="glass hover-neon skill-card">
+      <div class="skill-card-title"><i class="fas fa-server" style="color:#ff9900; font-size:1.4rem;"></i> Cloud & Infrastructure</div>
+      <div class="skill-pills">
+        <span class="xpill">Amazon Web Services</span>
+        <span class="xpill">Terraform</span>
+        <span class="xpill">Linux</span>
+        <span class="xpill">Apache CloudStack</span>
+      </div>
+    </div>
+    <div class="glass hover-neon skill-card">
+      <div class="skill-card-title"><i class="fas fa-code" style="color:#00599C; font-size:1.4rem;"></i> Programming</div>
+      <div class="skill-pills">
+        <span class="xpill">C++</span>
+        <span class="xpill">Java</span>
+        <span class="xpill">Data Structures</span>
+        <span class="xpill">Algorithms</span>
+        <span class="xpill">Git</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="s-eyebrow">03 — Milestones</div>
+  <h2 class="s-title">Training & Experience</h2>
+  <div class="timeline">
+    <div class="glass hover-neon tl-item">
+      <div class="tl-dot" style="background:#ff9900;"></div>
+      <div class="tl-header">
+        <div class="tl-title">
+          <h3>AWS Academy Graduate</h3>
+          <p style="color:#ff9900;">Cloud Architecting Program</p>
+        </div>
+      </div>
+      <ul>
+        <li>Mastered core AWS infrastructure including EC2, S3, VPCs, and IAM policies.</li>
+        <li>Designed highly available architectures adhering to the AWS Well-Architected Framework.</li>
+      </ul>
+      <a href="https://www.credly.com/badges/9ac300d2-e0fe-4e13-94ca-cf039f8b665c/public_url" target="_blank" class="github-link" style="color: #ff9900; margin-top: 0.5rem;">
+        <i class="fas fa-certificate"></i> View AWS Certificate <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
+      </a>
+    </div>
+
+    <div class="glass hover-neon tl-item">
+      <div class="tl-dot" style="background:#e11d48;"></div>
+      <div class="tl-header">
+        <div class="tl-title">
+          <h3>Red Hat Training</h3>
+          <p style="color:#e11d48;">Linux System Administration (RHCSA)</p>
+        </div>
+      </div>
+      <ul>
+        <li>Configured and administered enterprise Linux environments.</li>
+        <li>Automated administrative tasks and managed permissions via shell scripting.</li>
+      </ul>
+      <a href="https://www.credly.com/badges/6d1a1ed1-514b-4d4d-8c50-323b88fe081f/public_url" target="_blank" class="github-link" style="color: #e11d48; margin-top: 0.5rem;">
+        <i class="fas fa-certificate"></i> View RHCSA Certificate <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="s-eyebrow">04 — Execution</div>
+  <h2 class="s-title">Featured Work</h2>
+  <div class="proj-grid">
+    <div class="glass hover-neon proj-card">
+      <div class="proj-tags">
+        <span class="ptag tag-aws"><i class="fab fa-aws"></i> AWS EC2</span>
+        <span class="ptag tag-tf"><i class="fas fa-cube"></i> Terraform</span>
+      </div>
+      <h3>CI/CD Pipelines using Terraform</h3>
+      <p>Built a robust pipeline using Terraform code to automate the provisioning of cloud infrastructure. Eliminated manual console configuration, ensuring repeatable and version-controlled environments.</p>
+      
+      <a href="https://github.com/Harsh-Ukey/aws-ci-cd-terraform-pipeline" target="_blank" class="github-link">
+        <i class="fab fa-github"></i> View Repository <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
+      </a>
+    </div>
+
+    <div class="glass hover-neon proj-card">
+      <div class="proj-tags">
+        <span class="ptag tag-cpp"><i class="fas fa-file-code"></i> C++</span>
+        <span class="ptag tag-aws"><i class="fas fa-database"></i> Database</span>
+      </div>
+      <h3>University Management System</h3>
+      <p>Developed a comprehensive system handling user creation, registration workflows, and course allocations. Includes an integrated library interface displaying course-related books and issue dates.</p>
+      
+      <a href="https://github.com/Harsh-Ukey/aws-iam-role-based-access-control" target="_blank" class="github-link">
+        <i class="fab fa-github"></i> View Repository <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="events">
+  <div class="s-eyebrow">05 — Community</div>
+  <h2 class="s-title">Events & Hackathons</h2>
+  <div class="events-grid">
+    <div class="glass hover-neon event-card">
+      <div class="event-img-wrap">
+        <img src="./images/hackathon-main.jpg" alt="Hackathon Main" class="e-img img-main">
+        <img src="./images/hackathon-left.jpeg" alt="Hackathon Left" class="e-img img-left">
+        <img src="./images/hackathon-right.jpeg" alt="Hackathon Right" class="e-img img-right">
+      </div>
+      <div class="event-info">
+        <h3>DevCreate Hackathon</h3>
+        <p>Competed alongside developers to rapid-prototype solutions. Successfully cleared Round 2 among 50+ participating teams, demonstrating execution under pressure.</p>
+        <span class="event-date">March 2024</span>
+      </div>
+    </div>
+
+    <div class="glass hover-neon event-card">
+      <div class="event-img-wrap">
+        <img src="./images/anime-main.jpeg" alt="Anime Club Main" class="e-img img-main">
+        <img src="./images/anime-left.jpeg" alt="Anime Club Left" class="e-img img-left">
+        <img src="./images/anime-right.jpeg" alt="Anime Club Right" class="e-img img-right">
+      </div>
+      <div class="event-info">
+        <h3>Tech & Anime Club — Secretary</h3>
+        <p>Serving as the official Club Secretary for over a year. I manage all administrative operations, official university documentation, and club finances, balancing technical studies with active community leadership.</p>
+        <span class="event-date">Ongoing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="s-eyebrow">06 — Foundation</div>
+  <h2 class="s-title">Education</h2>
+  <div class="glass hover-neon edu-card">
+    <div class="edu-icon-container">
+      <i class="fas fa-graduation-cap" style="font-size: 2.5rem; color: #3b82f6;"></i>
+    </div>
+    <div class="edu-details">
+      <h3>B.Tech Computer Science Engineering</h3>
+      <p style="font-weight:800; color:var(--muted); margin-bottom:0.4rem; font-size: 1.1rem;">Lovely Professional University, Jalandhar</p>
+      <p style="color:var(--muted); font-size:1.05rem;">Minor Specialization: Cloud Computing</p>
+    </div>
+    <div class="cgpa-box">
+      <span>Current CGPA</span>
+      <strong>6.66</strong>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="s-eyebrow">07 — Connect</div>
+  <h2 class="s-title">Let's Talk Cloud</h2>
+  <div class="contact-grid">
+    
+    <a href="mailto:hcukey2004@gmail.com" class="contact-card">
+      <div class="c-icon" style="background:rgba(225, 29, 72, 0.1); color:#e11d48;"><i class="fas fa-envelope"></i></div>
+      <div>
+        <div style="font-size:0.75rem; color:var(--muted); font-weight:800; text-transform:uppercase;">Email</div>
+        <div style="font-weight:700;">Drop a message</div>
+      </div>
+    </a>
+    
+    <a href="https://www.linkedin.com/in/harsh-ukey/" target="_blank" class="contact-card">
+      <div class="c-icon" style="background:rgba(10, 102, 194, 0.1); color:#0a66c2;"><i class="fab fa-linkedin-in"></i></div>
+      <div>
+        <div style="font-size:0.75rem; color:var(--muted); font-weight:800; text-transform:uppercase;">LinkedIn</div>
+        <div style="font-weight:700;">Harsh Ukey</div>
+      </div>
+    </a>
+
+    <a href="https://github.com/Harsh-Ukey" target="_blank" class="contact-card">
+      <div class="c-icon" style="background:rgba(30, 41, 59, 0.1); color:#1e293b;"><i class="fab fa-github"></i></div>
+      <div>
+        <div style="font-size:0.75rem; color:var(--muted); font-weight:800; text-transform:uppercase;">GitHub</div>
+        <div style="font-weight:700;">View Profile</div>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="glass hover-neon cv-banner">
+    <div class="cv-icon-wrap">
+      <i class="fas fa-file-pdf"></i>
+    </div>
+    <div>
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">Download My Resume</h3>
+      <p style="color: var(--muted); font-size: 1.05rem; max-width: 450px; margin: 0 auto;">Get the complete overview of my technical skills, infrastructure projects, and academic qualifications.</p>
+    </div>
+    
+    <a href="D:\Doc\My_CV.pdf" target="_blank" class="btn btn-primary" style="margin-top: 0.5rem; padding: 1rem 2.5rem; font-size: 1.05rem;">
+      <i class="fas fa-download"></i> Get CV
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer style="text-align:center; padding:5rem 2rem; margin-top:2rem;">
+  <p style="font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:700; margin-bottom:0.5rem; color:var(--text);">Harsh Ukey.</p>
+  <p style="font-size:0.95rem; color:var(--muted); font-weight:600;">Built with Code, Configured with Cloud.</p>
+</footer>
+
+</body>
+</html>
